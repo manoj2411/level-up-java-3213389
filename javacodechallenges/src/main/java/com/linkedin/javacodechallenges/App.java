@@ -1,14 +1,27 @@
 package com.linkedin.javacodechallenges;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class App {
     public static List<String> findStudentsWithIncompleteVolunteerEvents(
             List<String> students,
             Map<String, List<String>> attendeesMapping) {
-        // TODO: implement function
-        return List.of();
+
+        Map<String, Long> attendence = attendeesMapping
+            .values().stream()
+            .flatMap(Collection::stream)
+            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        
+        List<String> result = new ArrayList<>();        
+        for(String student : students) {
+            if(attendence.getOrDefault(student, 0l) < 2) {
+                result.add(student);
+            }
+        }
+
+        return result;
     }
 
     public static void main(String[] args) {
