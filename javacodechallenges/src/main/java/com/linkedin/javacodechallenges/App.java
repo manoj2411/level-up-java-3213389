@@ -1,5 +1,7 @@
 package com.linkedin.javacodechallenges;
 
+import java.time.LocalDate;
+
 public class App 
 {
     // Create function to calculate the date that's 
@@ -7,7 +9,11 @@ public class App
 
     public static void main( String[] args )
     {
-        System.out.println("100 days from now is... " 
-            /* add function call */);
+        System.out.println("100 days from now is... " +
+            LocalDate.now());
+    }
+
+    public LocalDate calculate100Days(LocalDate date) { 
+        return date.plusDays(100);
     }
 }
